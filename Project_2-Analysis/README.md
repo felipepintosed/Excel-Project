@@ -1,181 +1,150 @@
+# Análisis del Mercado Laboral en Data Science
 
-# Project 2 Analysis
+## Introducción
 
-## Introduction
+Como profesional orientado al análisis de datos y en constante búsqueda de crecimiento laboral, siempre me llamó la atención la falta de claridad respecto a qué habilidades generan un verdadero impacto en la remuneración dentro del mercado de Data Science. Con este proyecto me propuse analizar qué tecnologías demandan las empresas líderes y cómo orientarse hacia puestos mejor pagos.
 
-As a former job seeker, I’ve always been surprised by the lack of data exploring the most optimal jobs and skills in the data science market. I set out to understand what skills top employers request and how to land more pay.
+Este trabajo forma parte de los proyectos prácticos realizados dentro de la certificación de Excel de **Luke Barousse**.
 
-### Questions to Analyze
+### Preguntas Clave del Análisis
 
-To understand the data science job market, I asked the following:
+Para entender la dinámica del mercado laboral, planteé las siguientes preguntas:
 
-1. **Do more skills get you better pay?**
-2. **What’s the salary for data jobs in different regions?**
-3. **What are the top skills of data professionals?**
-4. **What’s the pay for the top 10 skills?**
+1. **¿Sumar más habilidades garantiza un mejor salario?**
+2. **¿Cómo varía la remuneración de los roles de datos según la región geográfica?**
+3. **¿Cuáles son las habilidades más demandadas por las empresas?**
+4. **¿Cuánto pagan las 10 habilidades más requeridas?**
 
-### Excel Skills Used
+### Habilidades de Excel Aplicadas
 
-The following Excel skills were utilized for analysis:
+Para este desarrollo utilicé técnicas avanzadas de procesamiento y modelado:
 
-- **📊 Pivot Tables**
-- **📈 Pivot Charts**
-- **🧮 DAX (Data Analysis Expressions)**
-- **🔍 Power Query**
-- **💪 Power Pivot**
+- **📊 Tablas Dinámicas (Pivot Tables)**
+- **📈 Gráficos Dinámicos (Pivot Charts)**
+- **🧮 Lenguaje DAX (Data Analysis Expressions)**
+- **🔍 Power Query (ETL)**
+- **💪 Power Pivot (Modelado Relacional)**
 
-### Data Jobs Dataset
+### Dataset Utilizado
 
-The dataset used for this project contains real-world data science job information from 2023. The dataset is available via my Excel course, which provides a foundation for analyzing data using Excel. 
+El dataset incluye ofertas laborales reales del sector de Data Science obtenidas durante 2023, provisto en la certificación de Luke Barousse. Incluye campos detallados como:
 
-It includes detailed information on:
+- **👨‍💼 Títulos de puestos**
+- **💰 Salarios anuales**
+- **📍 Ubicación geográfica**
+- **🛠️ Habilidades técnicas asociadas**
 
-- **👨‍💼 Job titles**
-- **💰 Salaries**
-- **📍 Locations**
-- **🛠️ Skills**
+## 1️⃣ ¿Sumar más habilidades garantiza un mejor salario?
 
-## 1️⃣ Do more skills get you better pay?
+### 🔍 Herramienta: Power Query (ETL)
 
-### 🔍 Skill: Power Query (ETL)
+#### 📥 Extracción
 
-#### 📥 Extract
+- Utilicé Power Query para extraer los datos originales del archivo (`data_salary_all.xlsx`) y estructurar dos consultas independientes:
+    - 🗃️ Primera consulta con la totalidad de los datos de las ofertas laborales.
+    - 🔧 Segunda consulta asociando las habilidades específicas (`skills`) a cada ID de puesto.
 
-- I first used Power Query to extract the original data (`data_salary_all.xlsx`) and create two queries:
-    - 🗃️ First one with all the data jobs information.
-    - 🔧 The second listing the skills for each job ID.
+#### 🔄 Transformación
 
-#### 🔄 Transform
+- Transformé ambas consultas ajustando tipos de datos, eliminando columnas innecesarias, aplicando limpieza de texto para remover palabras específicas y eliminando espacios en blanco sobrantes.
 
-- Then, I transformed each query by changing column types, removing unnecessary columns, cleaning text to eliminate specific words, and trimming excess whitespace.
-    - 📊 data_jobs_all
+#### 🔗 Carga
 
-        ![2_Project_Analysis_Screenshot1.png](/0_Resources/Images/2_Project_Analysis_Screenshot1.png)
+- Cargué ambas consultas transformadas directamente al Modelo de Datos, dejando la estructura lista para el análisis relacional.
 
-    - 🛠️ data_job_skills
-
-        ![2_Project_Analysis_Screenshot2.png](/0_Resources/Images/2_Project_Analysis_Screenshot2.png)
-
-#### 🔗 Load
-
-- Finally, I loaded both transformed queries into the workbook, setting the foundation for my subsequent analysis.
-    - 📊 data_jobs_all
-
-        ![2_Project_Analysis_Screenshot3.png](/0_Resources/Images/2_Project_Analysis_Screenshot3.png)
-
-    - 🛠️ data_job_skills
-
-        ![2_Project_Analysis_Screenshot4.png](/0_Resources/Images/2_Project_Analysis_Screenshot4.png)
-
-### 📊 Analysis
+### 📊 Análisis
 
 #### 💡 Insights
 
-- 📈 There is a positive correlation between the number of skills requested in job postings and the median salary, particularly in roles like Senior Data Engineer and Data Scientist.
-- 💼 Roles that require fewer skills, like Business Analyst, tend to offer lower salaries, suggesting that more specialized skill sets command higher market value.
+- 📈 Existe una correlación positiva entre la cantidad de habilidades requeridas en una oferta y la mediana salarial, especialmente en roles avanzados como Senior Data Engineer y Data Scientist.
+- 💼 Puestos con requerimientos técnicos más acotados, como Business Analyst, registran medianas salariales más bajas, demostrando que la especialización técnica incrementa el valor de mercado del profesional.
 
-    ![2_Project_Analysis_Chart1.png](/0_Resources/Images/2_Project_Analysis_Chart1.png)
+#### 🤔 Diagnóstico / Conclusión Práctica
 
-#### 🤔 So What
+- Esta tendencia confirma la importancia estratégica de incorporar habilidades técnicas clave si el objetivo es acceder a posiciones de alta remuneración.
 
-- This trend emphasizes the value of acquiring multiple relevant skills, particularly for individuals aiming for higher-paying roles.
+## 2️⃣ ¿Cómo varía la remuneración de los roles de datos según la región geográfica?
 
-## 2️⃣ What’s the salary for data jobs in different regions?
+### 🧮 Herramientas: Tablas Dinámicas & DAX
 
-### 🧮 Skills: PivotTables & DAX
+#### 📈 Tabla Dinámica
 
-#### 📈Pivot Table
+- Construí una Tabla Dinámica conectada directamente al Modelo de Datos de Power Pivot.
+- Ubiqué la columna `job_title_short` en las filas y el campo `salary_year_avg` en los valores.
+- Creé una medida en DAX para calcular la mediana salarial específica de las ofertas dentro de Estados Unidos:
 
-- 🔢 I created a PivotTable using the Data Model I created with Power Pivot.
-- 📊 I moved the `job_title_short` to the rows area and `salary_year_avg` into the values area.
-- 🧮 Then I added new measure to calculate the median salary for United States jobs.
-    ```
     =CALCULATE(
         MEDIAN(data_jobs_all[salary_year_avg]),
-        data_jobs_all[job_country] = "United States")
-    ```
+        data_jobs_all[job_country] = "United States"
+    )
 
 #### 🧮 DAX
 
-- To calculate the median year salary I used DAX.
+- Para obtener la mediana salarial global utilicé la siguiente medida:
 
-    ```
     Median Salary := MEDIAN(data_jobs_all[salary_year_avg])
-    ```
 
-### 📊 Analysis
+### 📊 Análisis
 
 #### 💡 Insights
 
-- 💼 Job roles like Senior Data Engineer and Data Scientist command higher median salaries both in the US and internationally, showcasing the global demand for high-level data expertise.
-- 💰 The salary disparity between US and Non-US roles is particularly notable in high-tech jobs, which might be influenced by the concentration of tech industries in the US.
+- 💼 Roles como Senior Data Engineer y Data Scientist mantienen las medianas salariales más altas tanto en EE. UU. como a nivel internacional, reflejando la fuerte demanda global de perfiles senior.
+- 💰 La brecha salarial entre Estados Unidos y el resto del mundo es considerablemente marcada en puestos de tecnología avanzada, influenciada por la concentración de empresas tech en dicho mercado.
 
-    ![2_Project_Analysis_Chart2.png](/0_Resources/Images/2_Project_Analysis_Chart2.png)
+#### 🤔 Diagnóstico / Conclusión Práctica
 
-#### **🤔 So What**
+- Estos datos son clave al momento de evaluar propuestas laborales, negociar salarios o definir objetivos de carrera con proyección internacional.
 
-- These salary insights are important for planning and salary negotiations, helping professionals and companies align their offers with market standards while considering geographical variations.
+## 3️⃣ ¿Cuáles son las habilidades más demandadas por las empresas?
 
-## 3️⃣ What are the top skills of data professionals?
-
-### 🔧 Skill: Power Pivot
+### 🔧 Herramienta: Power Pivot
 
 #### 💪 Power Pivot
 
-- 🔗 I created a data model by integrating the `data_jobs_all` and `data_jobs_skills` tables into one model.
-- 🧹 Since I had already cleaned the data using Power Query; Power Pivot created a relationship between these two tables.
+- Integré las tablas `data_jobs_all` y `data_jobs_skills` dentro de un mismo Modelo de Datos relacional.
+- Al contar con datos limpios desde Power Query, establecí las relaciones necesarias entre ambas tablas sin redundancias.
 
-#### 🔗 Data Model
+#### 🔗 Modelo de Datos
 
-- I created a relationship between my two tables using the `job_id` column.
+- Vinculé ambas tablas mediante la clave primaria/foránea del campo `job_id` para permitir análisis multidimensionales.
 
-    ![2_Project_Analysis_Screenshot5.png](/0_Resources/Images/2_Project_Analysis_Screenshot5.png)
+#### 📃 Menú de Power Pivot
 
-#### 📃 Power Pivot Menu
+- Utilicé la interfaz de Power Pivot para administrar el modelo, definir jerarquías y calcular medidas personalizadas con DAX.
 
-- The Power Pivot menu was used to refine my data model and makes it easy to create measures.
+### 📊 Análisis
 
-    ![2_Project_Analysis_Screenshot6.png](/0_Resources/Images/2_Project_Analysis_Screenshot6.png)
+#### 💡 Insights
 
-### 📊Analysis
+- 💻 SQL y Python lideran de manera absoluta como los requisitos más solicitados, consolidándose como los cimientos técnicos indispensables para el análisis y procesamiento de datos.
+- ☁️ Tecnologías Cloud como AWS y Azure muestran una presencia cada vez mayor, evidenciando la migración del mercado hacia arquitecturas en la nube y Big Data.
 
-#### 💡Insights
+#### 🤔 Diagnóstico / Conclusión Práctica
 
-- 💻 SQL and Python dominate as top skills in data-related jobs, reflecting their foundational role in data processing and analysis.
-- ☁️ Emerging technologies like AWS and Azure also show significant presence, underlining the industry's shift towards cloud services and big data technologies.
+- Identificar el stack tecnológico dominante permite priorizar el aprendizaje de las herramientas con mayor retorno sobre la inversión de tiempo y estudio.
 
-    ![2_Project_Analysis_Chart3.png](/0_Resources/Images/2_Project_Analysis_Chart3.png)
+## 4️⃣ ¿Cuánto pagan las 10 habilidades más requeridas?
 
-#### 🤔So What
+### 📊 Herramienta: Gráficos Dinámicos Avanzados (Pivot Chart)
 
-- Understanding prevalent skills in the industry not only helps professionals stay competitive but also guides training and educational programs to focus on the most impactful technologies.
+#### 📈 Pivot Chart Combinado
 
-## 4️⃣ What’s the pay of the top 10 skills?
+- Creé un gráfico combinado para contrastar la mediana salarial frente al porcentaje de presencia de cada habilidad:
+    - 🪙 **Eje Principal:** Mediana Salarial (Gráfico de Columnas Agrupadas)
+    - 👍 **Eje Secundario:** Porcentaje de Frecuencia de la Habilidad (Línea con Marcadores)
+- Personalicé el gráfico ajustando títulos de ejes, limpiando líneas de cuadrícula y destacando los marcadores clave.
 
-### 📊 Skill: Advanced Charts (Pivot Chart)
+### 📊 Análisis
 
-#### 📈 PivotChart
+#### 💡 Insights
 
-- I created a combo PivotChart to plot median salary and skill likelihood (%) from my PivotTable.
-    - 🪙 **Primary Axis:** Median Salary (as a Clustered Column)
-    - 👍 **Secondary Axis:** Skill Likelihood (as a Line with Markers)
-- To customize the chart, I added a title axis title, removed the lines (skill likelihood), and changed the markers to diamonds.
+- 💰 Las medianas salariales más elevadas están directamente asociadas al dominio de herramientas como Python, Oracle y SQL.
+- 📉 Herramientas de ofimática tradicional como PowerPoint o Word presentan la menor frecuencia y las medianas salariales más bajas, confirmando que no aportan diferencial en roles analíticos de alto nivel.
 
-### 📊 Analysis
+### 🤔 Diagnóstico / Conclusión Práctica
 
-#### 💡Insights
+- El gráfico demuestra visualmente que enfocar la capacitación en tecnologías avanzadas (Python, SQL, Cloud) impacta de manera directa en las aspiraciones salariales dentro de la industria tech.
 
-- 💰 Higher median salaries are associated with skills like Python, Oracle, and SQL, suggesting their critical role in high-paying tech jobs.
-- 📉 Skills like PowerPoint and Word have the lowest median salaries and likelihood, indicating less specialization and demand in high-salary sectors.
+## Conclusión
 
-    ![2_Project_Analysis_Chart4.png](/0_Resources/Images/2_Project_Analysis_Chart4.png)
-
-### 🤔So What
-
-- This chart highlights the importance of investing time in learning high-value skills like Python and SQL, which are evidently tied to higher paying roles, especially for those looking to maximize their salary in the tech industry.
-
-## Conclusion
-
-As a data enthusiast and former job seeker, I embarked on this Excel-based project to uncover valuable insights about the data science job market. Using a dataset I've curated from real-world job postings, I analyzed job titles, salaries, locations, and essential skills. By leveraging Excel features like Power Query, PivotTables, DAX, and charts, I discovered key correlations between multiple skills and higher salaries, particularly in Python, SQL, and cloud technologies. 
-
-I hope this project serves as a practical guide for data professionals and provides an overview of the skills needed for higher-paying roles.
+Desarrollé este proyecto analítico aplicando las herramientas avanzadas de Excel aprendidas en la certificación con Luke Barousse. A partir de datos reales del mercado laboral de Data Science, logré identificar patrones claros sobre qué tecnologías y niveles de especialización impulsan las mejores oportunidades salariales. Este trabajo refleja mi capacidad para transformar datos crudos en información estratégica para la toma de decisiones.
