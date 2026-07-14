@@ -1,35 +1,31 @@
 # Dashboard de Salarios en Data Jobs
 
 ## Introducción
+Dashboard interactivo desarrollado para analizar la relación entre roles, ubicación y remuneración en el mercado de Data Science. Este proyecto surge como parte del curso de **Luke Barousse**, con el objetivo de dotar a profesionales de datos de una herramienta para auditar su propia compensación basada en el mercado actual.
 
-Este dashboard de salarios fue desarrollado como parte del proyecto práctico del curso de **Luke Barousse**. Su objetivo es brindar a quienes buscan trabajo en el área de datos una herramienta clara para investigar salarios según el rol deseado y comparar la compensación en el mercado actual.
+## Funcionalidades Técnicas
+El dashboard utiliza fórmulas avanzadas para permitir la selección de múltiples criterios dinámicos sin necesidad de macros.
 
-El análisis utiliza información detallada sobre títulos de puestos, salarios, ubicaciones y habilidades técnicas esenciales.
+### Lógica de Filtrado (Excel Formula)
+Para el cálculo de la mediana bajo condiciones complejas, se implementó:
+=MEDIAN(
+    IF(
+        (jobs[job_title_short]=A2)*
+        (jobs[job_country]=country)*
+        (ISNUMBER(SEARCH(type,jobs[job_schedule_type])))*
+        (jobs[salary_year_avg]<>0),
+        jobs[salary_year_avg]
+    )
+)
 
-### Archivo del Proyecto
-Puedes explorar el dashboard final aquí: [1_Salary_Dashboard.xlsx](1_Salary_Dashboard.xlsx).
+### Gestión de Listas Únicas
+Uso de la función FILTER para extraer tipos de jornada dinámicos, eliminando ruido (valores nulos o términos duplicados):
+=FILTER(J2#,(NOT(ISNUMBER(SEARCH("and",J2#))+ISNUMBER(SEARCH(",",J2#))))*(J2#<>0))
 
-### Habilidades de Excel Aplicadas
+## Tecnologías y Habilidades Aplicadas
+* **Excel:** Funciones matriciales (Array Formulas), Validación de datos (Dropdowns), Mapas de calor y Gráficos interactivos.
+* **Data Viz:** Gráficos de barras optimizados para lectura rápida de medianas salariales.
+* **UI/UX:** Interfaz de usuario intuitiva mediante listas de validación conectadas dinámicamente al backend de datos.
 
-Para este desarrollo, utilicé las siguientes funcionalidades de Excel:
-
-- **📉 Gráficos Dinámicos:** Visualización optimizada para comparación de salarios.
-- **🧮 Fórmulas y Funciones Avanzadas:** Lógica compleja para filtrado de datos.
-- **❎ Validación de Datos:** Creación de listas desplegables para una experiencia de usuario interactiva.
-
----
-
-## Desarrollo del Dashboard
-
-### 📉 Gráficos
-Se implementaron gráficos de barras horizontales (para comparar salarios medianos por puesto) y mapas de calor (para identificar disparidades salariales geográficas). Todo el análisis es interactivo.
-
-### 🧮 Fórmulas Clave
-- **Mediana por Puesto:** Utilizando `MEDIAN` combinado con `IF` para excluir valores nulos y filtrar por país y tipo de jornada.
-- **Listado Único de Jornadas:** Empleé la función `FILTER` para limpiar la lista de tipos de trabajo.
-
-### ❎ Validación de Datos
-Configuré menús desplegables en `Job Title`, `Country` y `Type` para asegurar la integridad de los datos y mejorar la usabilidad.
-
-## Conclusión
-Este dashboard demuestra cómo transformar datos brutos en decisiones informadas. Te invito a explorar el archivo de Excel para ver todo el proceso analítico detallado.
+## Archivo del Proyecto
+Puedes explorar el análisis completo en: 1_Salary_Dashboard.xlsx
